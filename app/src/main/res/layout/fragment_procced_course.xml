@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.Fragments.ProccedCourseFragment">
+
+    <!-- Lottie Animation for loading -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimationView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/book_page_slide_animation" />
+
+    <!-- Course details layout, initially invisible until data is loaded -->
+    <LinearLayout
+        android:id="@+id/courseDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/courseImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/not_available"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/courseNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/selected_course_name"
+            android:gravity="center_horizontal"
+            android:textSize="22sp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/main_color"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You have selected mentioned course"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_light_black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click on the 'Proceed' button below to confirm"
+            android:gravity="center_horizontal"
+            android:textSize="15sp"
+            android:layout_marginTop="28dp"
+            android:textColor="@color/text_light_black" />
+
+        <Button
+            android:id="@+id/proceedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proceed"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
+            android:layout_marginTop="36dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

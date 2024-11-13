@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <!-- Splash Fragment -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginOptionsFragment"
+            app:destination="@id/loginOptionsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeActivity2"
+            app:destination="@id/homeActivity" />
+    </fragment>
+
+    <!-- View Pager Fragment -->
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.OnBoarding.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager">
+        <action
+            android:id="@+id/action_viewPagerFragment_to_loginOptionsFragment"
+            app:destination="@id/loginOptionsFragment" />
+    </fragment>
+
+    <!-- Login Fragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_courseCategoryFragment"
+            app:destination="@id/courseCategoryFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_passwordResetFragment"
+            app:destination="@id/passwordResetFragment" />
+    </fragment>
+
+    <!-- Registration Fragment -->
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_registrationFragment_to_courseCategoryFragment"
+            app:destination="@id/courseCategoryFragment" />
+    </fragment>
+
+    <!-- Login Options Fragment -->
+    <fragment
+        android:id="@+id/loginOptionsFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.LoginOptionsFragment"
+        android:label="fragment_login_options"
+        tools:layout="@layout/fragment_login_options">
+        <action
+            android:id="@+id/action_loginOptionsFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginOptionsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_loginOptionsFragment_to_courseCategoryFragment"
+            app:destination="@id/courseCategoryFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <!-- Course Category Fragment -->
+    <fragment
+        android:id="@+id/courseCategoryFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.CourseCategoryFragment"
+        android:label="fragment_course_category"
+        tools:layout="@layout/fragment_course_category">
+        <action
+            android:id="@+id/action_courseCategoryFragment_to_courseSelectionFragment"
+            app:destination="@id/courseSelectionFragment" />
+        <action
+            android:id="@+id/action_courseCategoryFragment_to_proccedCourseFragment"
+            app:destination="@id/proccedCourseFragment" />
+        <action
+            android:id="@+id/action_courseCategoryFragment_to_homeActivity"
+            app:destination="@id/homeActivity"
+            app:popUpTo="@id/homeActivity"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Password Reset Fragment -->
+    <fragment
+        android:id="@+id/passwordResetFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.PasswordResetFragment"
+        android:label="fragment_password_reset"
+        tools:layout="@layout/fragment_password_reset">
+        <action
+            android:id="@+id/action_passwordResetFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- Course Selection Fragment -->
+    <fragment
+        android:id="@+id/courseSelectionFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.CourseSelectionFragment"
+        android:label="Course Selection"
+        tools:layout="@layout/fragment_course_selection">
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_courseSelectionFragment_to_proccedCourseFragment"
+            app:destination="@id/proccedCourseFragment" />
+    </fragment>
+
+    <!-- Procced Course Fragment -->
+    <fragment
+        android:id="@+id/proccedCourseFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.ProccedCourseFragment"
+        android:label="fragment_procced_course"
+        tools:layout="@layout/fragment_procced_course">
+        <argument
+            android:name="courseId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_proccedCourseFragment_to_setUpCourseFragment"
+            app:destination="@id/setUpCourseFragment" />
+    </fragment>
+
+    <!-- SetUp Course Fragment -->
+    <fragment
+        android:id="@+id/setUpCourseFragment"
+        android:name="com.example.preparify_jobpreparationapp.ui.Fragments.SetUpCourseFragment"
+        android:label="SetUp Course"
+        tools:layout="@layout/fragment_set_up_course">
+        <argument
+            android:name="courseId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_setUpCourseFragment_to_homeActivity"
+            app:destination="@id/homeActivity"
+            app:popUpTo="@id/homeActivity"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.example.preparify_jobpreparationapp.ui.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
+
+</navigation>

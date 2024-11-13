@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.OnBoarding.ThirdScreen">
+
+
+    <LinearLayout
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"
+        android:layout_margin="28dp">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/before" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_flex"
+            android:text="@string/back"
+            android:textColor="@color/main_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="101dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/strategy"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="@color/text_black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_flex"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:text="Get a proper Strategy\nand Practice set"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto_thin"
+        android:text="@string/profesional_s_choice"
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ellipse_next_false" />
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginHorizontal="6dp"
+            android:src="@drawable/ellipse_next_false" />
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ellipse_next_true" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnGetStarted"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_button"
+        android:text="Get Started"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"/>
+
+</LinearLayout>

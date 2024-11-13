@@ -1,0 +1,41 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@android:color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp"
+    android:padding="4dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false">
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_vertical"
+android:padding="16dp">
+
+<!-- Course Title -->
+<TextView
+    android:id="@+id/categoryName"
+    android:layout_width="0dp"
+    android:layout_height="28dp"
+    android:layout_marginStart="1dp"
+    android:layout_marginEnd="0dp"
+    android:layout_weight="1"
+    android:fontFamily="@font/roboto_flex"
+    android:text="Entrance Exam"
+    android:gravity="center"
+    android:textColor="@color/text_light_black"
+    android:ellipsize="marquee"
+    android:marqueeRepeatLimit="marquee_forever"
+    android:singleLine="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:textSize="16sp" />
+</LinearLayout>
+
+    </androidx.cardview.widget.CardView>

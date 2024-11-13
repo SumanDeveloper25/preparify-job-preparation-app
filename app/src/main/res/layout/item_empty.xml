@@ -1,0 +1,26 @@
+<!-- item_empty.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvEmptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Currently, no lessons have been added."
+        android:textSize="18sp"
+        android:textColor="@color/text_light_black"
+        android:fontFamily="@font/roboto_flex"
+        android:padding="8dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:lottie_rawRes="@raw/empty_state_animation"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
+</LinearLayout>

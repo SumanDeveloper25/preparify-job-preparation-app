@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_color">#00246B</color>
+    <color name="theme_color">#CADCFC</color>
+    <color name="statusBar_color">#284578</color>
+    <color name="text_black">#232323</color>
+    <color name="text_fade">#4E515B</color>
+    <color name="success">#35B82A</color>
+    <color name="gray">#E2E2E2</color>
+    <color name="lighter_gray">#80E2E2E2</color>
+    <color name="darker_gray">#A9A9A9</color>
+    <color name="warning">#DB4437</color>
+    <color name="facebook_color">#3b5998</color>
+    <color name="link_color">#1E88E5</color>
+    <color name="text_light_black">#393C45</color>
+</resources>

@@ -1,0 +1,183 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="30dp"
+    tools:context=".ui.Fragments.CourseCategoryFragment">
+
+    <!-- Include layout that stays fixed at the top -->
+    <include
+        layout="@layout/subtitle_back_btn"
+        android:id="@+id/fixedInclude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Scrollable content starts below the included layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fixedInclude"
+        android:paddingHorizontal="10dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Card 1 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="12dp">
+
+                    <!-- Image for Course Logo -->
+                    <ImageView
+                        android:id="@+id/courseImage2"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginEnd="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/classroom"
+                        android:padding="5dp"
+                        android:contentDescription="Class 1 to 12" />
+
+                    <!-- Course Title -->
+                    <TextView
+                        android:id="@+id/courseTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_flex"
+                        android:text="Class 1 to 12"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/text_light_black"
+                        android:textSize="18sp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/next"
+                        android:paddingHorizontal="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/white" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card 2 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="12dp">
+
+                    <!-- Image for Course Logo -->
+                    <ImageView
+                        android:id="@+id/courseImage1"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginEnd="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/school"
+                        android:contentDescription="Entrance Exam" />
+
+                    <!-- Course Title -->
+                    <TextView
+                        android:id="@+id/courseTitle2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_flex"
+                        android:text="Entrance Exam"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/text_light_black"
+                        android:textSize="18sp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/next"
+                        android:paddingHorizontal="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/white" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section: Popular Courses -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Popular Courses"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="14dp"
+                android:textSize="16sp"
+                android:textColor="@color/main_color"
+                android:textStyle="bold" />
+
+            <!-- RecyclerView for dynamic course list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTopVCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:scrollbars="none" />
+
+            <include
+                layout="@layout/show_more_btn"
+                android:id="@+id/showMoreCourses" />
+
+            <!-- Section: Top Categories -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Course Categories"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="14dp"
+                android:textSize="16sp"
+                android:textColor="@color/main_color"
+                android:textStyle="bold" />
+
+            <!-- RecyclerView for dynamic categories list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTop3CourseCategory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="false"
+                android:scrollbars="none" />
+
+            <include
+                layout="@layout/show_more_btn"
+                android:id="@+id/showMoreCategories"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
