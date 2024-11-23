@@ -67,7 +67,8 @@ class CourseRepository {
                                 .addOnSuccessListener { userDocument ->
                                     if (userDocument.exists()) {
                                         val userData = userDocument.toObject(User::class.java) ?: User()
-                                        val enrolledCourses = userData.enrolledCourses?.toMutableList() ?: mutableListOf()
+                                        val enrolledCourses = userData.enrolledCourses.toMutableList()
+                                            ?: mutableListOf()
 
                                         // Check if already enrolled in this course
                                         if (!enrolledCourses.contains(course.title)) { // Check by title

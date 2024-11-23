@@ -6,18 +6,41 @@
     android:paddingVertical="30dp"
     tools:context=".ui.Fragments.CourseCategoryFragment">
 
-    <!-- Include layout that stays fixed at the top -->
-    <include
-        layout="@layout/subtitle_back_btn"
-        android:id="@+id/fixedInclude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/btnDoLater"
+        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:gravity="end">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_flex"
+            android:text="@string/do_later"
+            android:textColor="@color/main_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="1dp"
+            android:src="@drawable/next" />
+
+    </LinearLayout>
 
     <!-- Scrollable content starts below the included layout -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fixedInclude"
+        android:layout_below="@id/btnDoLater"
         android:paddingHorizontal="10dp"
         android:scrollbars="none">
 

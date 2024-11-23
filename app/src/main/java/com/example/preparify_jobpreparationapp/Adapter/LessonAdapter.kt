@@ -1,17 +1,18 @@
 package com.example.preparify_jobpreparationapp.ui.Adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.preparify_jobpreparationapp.R
-import com.example.preparify_jobpreparationapp.data.Lesson
 import com.example.preparify_jobpreparationapp.ui.LessonContentActivity
 import com.airbnb.lottie.LottieAnimationView
+import com.example.preparify_jobpreparationapp.data.Lesson
 
-class LessonAdapter(private var lessons: List<Lesson>) :
+class LessonAdapter(private var lessons: List<Lesson>, private val courseId: String) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_LESSON = 1
@@ -68,15 +69,19 @@ class LessonAdapter(private var lessons: List<Lesson>) :
             is LessonViewHolder -> {
                 val lesson = lessons[position]
                 holder.lessonNumber.text = String.format("%02d", position + 1)
-                holder.lessonTitle.text = lesson.title
-                holder.lessonDescription.text = lesson.subtitle
+                holder.lessonTitle.text = lesson.title ?: "No Title"
+                holder.lessonDescription.text = lesson.subtitle ?: "No Description"
 
                 holder.itemView.setOnClickListener {
                     val context = holder.itemView.context
+                    Log.d("LESSON_ID", lesson.lessonId)
+
                     val intent = Intent(context, LessonContentActivity::class.java).apply {
                         putExtra("LESSON_ID", lesson.lessonId)
                         putExtra("LESSON_TITLE", lesson.title)
-                        putExtra("LESSON_CONTENT", lesson.content)
+                        putExtra("LESSON_CONTENT", lesson.content ?: "") // Handle possible null content
+                        putExtra("COURSE_ID", courseId) // Pass the courseId from the parent activity
+                        putParcelableArrayListExtra("LESSONS", ArrayList(lessons)) // Pass the list of lessons
                     }
                     context.startActivity(intent)
                 }

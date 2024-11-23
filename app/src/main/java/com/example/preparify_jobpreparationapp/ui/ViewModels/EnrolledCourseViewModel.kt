@@ -38,6 +38,7 @@ class EnrolledCourseViewModel(private val repository: EnrolledCourseRepository) 
         }
     }
 
+
     // Fetch the user's enrolled courses
     fun fetchUserCourses(userId: String) { // Accept userId as a parameter
         repository.getUserEnrolledCourses(userId) { courses, error ->

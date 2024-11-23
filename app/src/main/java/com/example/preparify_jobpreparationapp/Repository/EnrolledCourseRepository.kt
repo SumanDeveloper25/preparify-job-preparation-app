@@ -18,7 +18,9 @@ class EnrolledCourseRepository {
 
     fun fetchCourseData(courseTitle: String): Task<Course> {
         // Query the courses collection using the title
-        val courseRef = firestore.collection("courses").whereEqualTo("title", courseTitle).get()
+        val courseRef = firestore.collection("courses")
+            .whereEqualTo("title", courseTitle)
+            .get()
 
         // Create a Task to return a single Course object
         return courseRef.continueWith { task ->
@@ -31,13 +33,13 @@ class EnrolledCourseRepository {
         }
     }
 
-    // Method to enroll a user in a course based on Course object
     fun enrollInCourse(course: Course, onResult: (String) -> Unit) {
         if (currentUser != null) {
-            // Store only the title in the enrolledCourses list
+            // Store only the title in the enrolledCourses list for the user
             userRef?.update("enrolledCourses", FieldValue.arrayUnion(course.title))
                 ?.addOnSuccessListener {
-                    onResult("Successfully enrolled in ${course.title}")
+                    // Once user enrollment is successful, update the course count
+                    updateCourseCount(course.title, onResult)
                 }
                 ?.addOnFailureListener { e ->
                     onResult("Failed to enroll: ${e.message}")
@@ -47,7 +49,31 @@ class EnrolledCourseRepository {
         }
     }
 
-    // Method to fetch the user's enrolled courses
+    private fun updateCourseCount(courseTitle: String, onResult: (String) -> Unit) {
+        // Reference to the course document
+        val courseRef = firestore.collection("courses").document(courseTitle)
+
+        // Start a Firestore transaction to increment the 'enrolled' field
+        firestore.runTransaction { transaction ->
+            val courseSnapshot = transaction.get(courseRef)
+
+            // Check if the course document exists
+            if (!courseSnapshot.exists()) {
+                throw Exception("Course not found")
+            }
+
+            // Get the current value of 'enrolled' field and increment it
+            val currentEnrollment = courseSnapshot.getLong("enrolled") ?: 0
+            transaction.update(courseRef, "enrolled", currentEnrollment + 1)
+        }.addOnSuccessListener {
+            // Enrollment successful, return success message
+            onResult("Successfully enrolled in $courseTitle")
+        }.addOnFailureListener { e ->
+            // Handle any errors that occurred during the transaction
+            onResult("Failed to update course enrollment count: ${e.message}")
+        }
+    }
+
     fun getUserEnrolledCourses(userId: String, callback: (List<Course>?, String?) -> Unit) {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
@@ -98,3 +124,4 @@ class EnrolledCourseRepository {
             }
     }
 }
+

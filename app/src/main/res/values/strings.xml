@@ -55,5 +55,13 @@
     <string name="proceed">Proceed</string>
     <string name="banner_sample_text"><![CDATA[Let’s schedule your\nstudy Timing & Planning]]></string>
     <string name="mo_lesson">Currently, no lessons have been added.</string>
+    <string name="assessment">Assessment</string>
+    <string name="time_left">Time Left: 00:00</string>
+    <string name="remaining_question">Question 1 out of 10</string>
+    <string name="question_text">This is a Demo Question? </string>
+    <string name="next_text">next</string>
+    <string name="quiz_results">Quiz Results</string>
+    <string name="score">Score:</string>
+    <string name="total_questions">Total Questions:</string>
 
 </resources>

@@ -5,9 +5,10 @@ data class Course(
     var category: String = "",
     var createdBy: String = "",
     var creationDate: com.google.firebase.Timestamp? = null,
-    var enrolled: Int = 0,
+    var enrolled: Int = 0, // increase the enrolled
     var lastUpdatedBy: String = "",
     var logoUrl: String = "",
-    var lessons: List<Lesson> = listOf() // Nested list of lessons
+    var lessons: List<Lesson> = listOf(),
+    val progress: Int = 0
 )
 

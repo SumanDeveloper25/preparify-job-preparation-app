@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <!-- Declare the variable for score text -->
+        <variable
+            name="scoreText"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/cream"
+        android:paddingHorizontal="20dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/thumbAnimationView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="84dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/thumb_ok" />
+
+        <TextView
+            android:id="@+id/headingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:padding="14dp"
+            android:text="@{scoreText}"
+            android:textColor="@color/main_color"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="22dp"
+            android:text="You have a _what_ knowledge of Course_name so we recommend you revise again this lesson"
+            android:textAlignment="center"
+            android:textColor="@color/text_black"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/proceedButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="204dp"
+            android:background="@drawable/rounded_button"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</layout>

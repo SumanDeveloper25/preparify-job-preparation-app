@@ -1,5 +1,6 @@
 package com.example.preparify_jobpreparationapp.ui.Fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -59,8 +60,10 @@ class SetUpCourseFragment : Fragment() {
 
             // If enrollment is successful, navigate to HomeActivity after 3 seconds
             if (status == "Successfully enrolled in the course") {
+                isCourseSelect()
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().navigate(R.id.action_setUpCourseFragment_to_homeActivity)
+
                 }, 3000) // 3000 milliseconds = 3 seconds
             } else {
                 findNavController().navigate(R.id.action_setUpCourseFragment_to_homeActivity)
@@ -73,5 +76,12 @@ class SetUpCourseFragment : Fragment() {
         val intent = Intent(requireContext(), HomeActivity::class.java)
         startActivity(intent)
         requireActivity().finish() // Optional: close the current activity if needed
+    }
+
+    private fun isCourseSelect() {
+        val sharedPref = requireActivity().getSharedPreferences("onCourseSelect", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean("Finished", true)
+        editor.apply()
     }
 }

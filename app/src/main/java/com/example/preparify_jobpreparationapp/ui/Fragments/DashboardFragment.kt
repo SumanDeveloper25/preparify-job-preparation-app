@@ -1,6 +1,5 @@
 package com.example.preparify_jobpreparationapp.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.preparify_jobpreparationapp.R
 import com.example.preparify_jobpreparationapp.Repository.EnrolledCourseRepository
+import com.example.preparify_jobpreparationapp.Repository.UserRepository
 import com.example.preparify_jobpreparationapp.ui.Adapters.EnrolledCoursesAdapter
 import com.example.preparify_jobpreparationapp.ui.ViewModels.EnrolledCourseViewModel
 import com.example.preparify_jobpreparationapp.ui.ViewModels.EnrolledCourseViewModelFactory
-import com.google.firebase.auth.FirebaseAuth
+import java.util.Calendar
 
 class DashboardFragment : Fragment() {
 
@@ -27,6 +27,9 @@ class DashboardFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var enrolledCoursesAdapter: EnrolledCoursesAdapter
     private lateinit var viewAllTextView: TextView
+    private lateinit var userNameTextView: TextView
+    private lateinit var currentGreeting: TextView
+    private lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +40,9 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        userNameTextView = view.findViewById(R.id.user_name)
+        currentGreeting = view.findViewById(R.id.current_time)
 
         // Set up RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewEnrolledCourses)
@@ -50,13 +56,17 @@ class DashboardFragment : Fragment() {
         recyclerView.adapter = enrolledCoursesAdapter
         enrolledCoursesAdapter.setLoading(true)
 
-        // Get the current user's ID
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        // Initialize UserRepository
+        userRepository = UserRepository()
 
+        // Fetch and set user name
+        fetchAndSetUserName()
+        currentGreeting.text = getCurrentGreeting()
+
+        // Fetch user courses
+        val userId = userRepository.getAuthUserId()
         if (userId != null) {
             viewModel.fetchUserCourses(userId)
-        } else {
-            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
         }
 
         // Observe the enrolled courses LiveData
@@ -76,6 +86,28 @@ class DashboardFragment : Fragment() {
         // Set "View All" functionality
         viewAllTextView.setOnClickListener {
             enrolledCoursesAdapter.setShowAll(true)
+        }
+    }
+
+    private fun fetchAndSetUserName() {
+        userRepository.getAuthUserName { userName ->
+            val displayName = if (!userName.isNullOrEmpty()) "$userName" else "User"
+            val formattedName = "Hi, "+
+                displayName.split(" ")
+                    .firstOrNull()?.lowercase()
+                    ?.replaceFirstChar { it.uppercaseChar() }
+            userNameTextView.text = formattedName
+        }
+    }
+    private fun getCurrentGreeting(): String {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        return when (hour) {
+            in 5..11 -> "Good Morning"
+            in 12..16 -> "Good Afternoon"
+            in 17..20 -> "Good Evening"
+            else -> "Good Night"
         }
     }
 }

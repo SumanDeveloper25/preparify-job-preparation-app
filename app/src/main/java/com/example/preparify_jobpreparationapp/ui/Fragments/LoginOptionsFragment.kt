@@ -1,9 +1,10 @@
 package com.example.preparify_jobpreparationapp.ui.Fragments
 
+import android.accounts.Account
+import android.accounts.AccountManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,8 +33,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FacebookAuthProvider
 import org.json.JSONException
-import android.accounts.Account
-import android.accounts.AccountManager
 
 class LoginOptionsFragment : Fragment() {
 
@@ -50,12 +49,25 @@ class LoginOptionsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login_options, container, false)
         userRepository = UserRepository()
 
+        // Check if the user is already authenticated
+        if (userRepository.isUserAuthenticated()) {
+            onLoginFinished()
+            userRepository.isEnrolledInAnyCourse { isEnrolled ->
+                if (isAdded) {
+                    if (isEnrolled) {
+                        findNavController().navigate(R.id.action_loginOptionsFragment_to_homeActivity)
+                    } else {
+                        findNavController().navigate(R.id.action_loginOptionsFragment_to_courseCategoryFragment)
+                    }
+                }
+            }
+        }
+
         // Initialize Google Sign-In options
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         // Initialize ViewModel with UserRepository
@@ -70,21 +82,21 @@ class LoginOptionsFragment : Fragment() {
             handleSignInResult(task)
         }
 
-        // Facebook Login initialization
+        // Initialize Facebook callback manager
         callbackManager = CallbackManager.Factory.create()
 
-        // Set up Google and Facebook login buttons
+        // Initialize UI components
+        initializeUIComponents(view)
+
+        return view
+    }
+
+    private fun initializeUIComponents(view: View) {
         val googleLoginButton: Button = view.findViewById(R.id.btnGoogleLogin)
         val facebookLoginButton: Button = view.findViewById(R.id.btnFacebookLogin)
         val emailLoginButton: Button = view.findViewById(R.id.btnEmailLogin)
         val registerButton: TextView = view.findViewById(R.id.tvSignUp)
         val doLaterButton: LinearLayout = view.findViewById(R.id.btnDoLater)
-
-        // Check if the user is already authenticated
-        if (userRepository.isUserAuthenticated()) {
-            // If authenticated, navigate directly to the course categories
-            findNavController().navigate(R.id.action_loginOptionsFragment_to_courseCategoryFragment)
-        }
 
         // Google login button click
         googleLoginButton.setOnClickListener {
@@ -105,7 +117,7 @@ class LoginOptionsFragment : Fragment() {
         // Facebook login button click
         facebookLoginButton.setOnClickListener {
             removeFacebookAccounts()
-            LoginManager.getInstance().logOut() // Log out of any existing Facebook sessions
+            LoginManager.getInstance().logOut()
             LoginManager.getInstance().logInWithReadPermissions(
                 this, callbackManager, listOf("email", "public_profile")
             )
@@ -123,20 +135,6 @@ class LoginOptionsFragment : Fragment() {
 
             override fun onSuccess(result: LoginResult) {
                 handleFacebookAccessToken(result.accessToken)
-                Log.d("FacebookLogin", "Login Success: $result")
-            }
-        })
-
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Override the back button to close the app
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                requireActivity().finishAffinity() // Close the app
             }
         })
     }
@@ -145,13 +143,8 @@ class LoginOptionsFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             userViewModel.signInWithGoogle(account) { firestoreSuccess ->
-                if (firestoreSuccess) {
-                    // Navigate to CourseCategoryFragment once Firestore data is loaded
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (isAdded && !isDetached) {
-                            findNavController().navigate(R.id.action_loginOptionsFragment_to_courseCategoryFragment)
-                        }
-                    }, 0.4.toLong()) // Small delay to ensure proper data loading
+                if (firestoreSuccess && isAdded) {
+                    findNavController().navigate(R.id.action_loginOptionsFragment_to_courseCategoryFragment)
                 } else {
                     Log.e("Firestore", "Failed to load Firestore data")
                 }
@@ -160,7 +153,6 @@ class LoginOptionsFragment : Fragment() {
             Log.w("GoogleSignIn", "signInResult:failed code=" + e.statusCode)
         }
     }
-
 
     private fun handleFacebookAccessToken(token: AccessToken?) {
         token?.let {
@@ -188,7 +180,6 @@ class LoginOptionsFragment : Fragment() {
     private fun removeFacebookAccounts() {
         val accountManager = AccountManager.get(requireContext())
         val accounts: Array<Account> = accountManager.getAccountsByType("com.facebook.auth.login")
-
         for (account in accounts) {
             accountManager.removeAccountExplicitly(account)
         }
@@ -196,7 +187,12 @@ class LoginOptionsFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        // Handle Facebook login result
         callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+    private fun onLoginFinished() {
+        val sharedPref = requireActivity().getSharedPreferences("onLogin", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean("Finished", true)
+        editor.apply()
     }
 }

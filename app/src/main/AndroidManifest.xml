@@ -16,6 +16,12 @@
         android:theme="@style/Theme.PreparifyJobPreparationApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.QuizResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AssessmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.LessonContentActivity"
             android:exported="false" />
         <activity

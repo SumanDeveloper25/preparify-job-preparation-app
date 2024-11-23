@@ -100,5 +100,4 @@ dependencies {
     implementation(libs.cardview)
     implementation(libs.glide)
 
-
 }

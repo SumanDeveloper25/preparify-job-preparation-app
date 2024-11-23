@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.preparify_jobpreparationapp.R
+import com.example.preparify_jobpreparationapp.Repository.UserRepository
 
 class SplashFragment : Fragment() {
 
@@ -17,8 +18,8 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Handler().postDelayed({
-            if(onSetupFinished()) {
-                findNavController().navigate(R.id.action_splashFragment_to_homeActivity2)
+            if(onLoginFinished()) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeActivity)
             }
             else if (onBoardingFinished()) {
                 findNavController().navigate(R.id.action_splashFragment_to_loginOptionsFragment)
@@ -34,6 +35,10 @@ class SplashFragment : Fragment() {
     }
     private fun onSetupFinished(): Boolean {
         val sharedPref = requireActivity().getSharedPreferences("onSetup", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("Finished", false)
+    }
+    private fun onLoginFinished(): Boolean {
+        val sharedPref = requireActivity().getSharedPreferences("onLogin", Context.MODE_PRIVATE)
         return sharedPref.getBoolean("Finished", false)
     }
 }
