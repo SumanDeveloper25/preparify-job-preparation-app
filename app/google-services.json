@@ -1,42 +1,42 @@
 {
   "project_info": {
     "project_number": "575830212798",
-    "firebase_url": "https://job-preparation-app-c206e-default-rtdb.firebaseio.com",
-    "project_id": "job-preparation-app-c206e",
-    "storage_bucket": "job-preparation-app-c206e.appspot.com"
+    "firebase_url": "https://YOUR_PROJECT",
+    "project_id": "https://YOUR_PROJECT",
+    "storage_bucket": "https://YOUR_PROJECT"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:575830212798:android:4079a3ccd6266d29d89eef",
+        "mobilesdk_app_id": "https://YOUR_PROJECT",
         "android_client_info": {
-          "package_name": "com.example.preparify_jobpreparationapp"
+          "package_name": "https://YOUR_PROJECT"
         }
       },
       "oauth_client": [
         {
-          "client_id": "575830212798-4g5eoqf56ld0a3ffd39fj4kth8oblhm2.apps.googleusercontent.com",
+          "client_id": "https://YOUR_PROJECT",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.preparify_jobpreparationapp",
-            "certificate_hash": "0aee55ca10aa9eb3987d8ce01e00267fdf2ea395"
+            "certificate_hash": "https://YOUR_PROJECT"
           }
         },
         {
-          "client_id": "575830212798-frrdn26i4iuv9ke8j3ie9nnhe7etsq6e.apps.googleusercontent.com",
+          "client_id": "https://YOUR_PROJECT",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCx4ttECJi3Wx6CbQXK8Zuy5uRkx5gh9Zo"
+          "current_key": "https://YOUR_PROJECT_KEY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "575830212798-frrdn26i4iuv9ke8j3ie9nnhe7etsq6e.apps.googleusercontent.com",
+              "client_id": "https://YOUR_PROJECT_CLIENT_ID,
               "client_type": 3
             }
           ]
